@@ -13,10 +13,101 @@ const STORAGE_KEY = 'total_cash_data';
 const CAPITAL_HISTORY_STORAGE_KEY = 'total_cash_capital_history';
 
 const defaultData: AppData = {
-  incomes: [],
-  expenses: [],
-  assets: [],
-  liabilities: [],
+  incomes: [
+    {
+      id: 'demo-income-salary',
+      name: 'Основная работа',
+      amount: 185000,
+      comment: 'Зарплата после налогов',
+    },
+    {
+      id: 'demo-income-freelance',
+      name: 'Проектная работа',
+      amount: 45000,
+      comment: 'Средний доход по разовым задачам',
+    },
+    {
+      id: 'demo-income-investments',
+      name: 'Дивиденды',
+      amount: 12000,
+      comment: 'Среднемесячные выплаты по портфелю',
+    },
+  ],
+  expenses: [
+    {
+      id: 'demo-expense-rent',
+      name: 'Аренда квартиры',
+      amount: 65000,
+      comment: 'Ежемесячный платеж за жилье',
+    },
+    {
+      id: 'demo-expense-food',
+      name: 'Продукты и кафе',
+      amount: 42000,
+      comment: 'Питание дома и вне дома',
+    },
+    {
+      id: 'demo-expense-transport',
+      name: 'Транспорт',
+      amount: 14000,
+      comment: 'Такси, каршеринг и общественный транспорт',
+    },
+  ],
+  assets: [
+    {
+      id: 'demo-asset-apartment',
+      type: 'Недвижимость',
+      name: 'Квартира',
+      amount: 9200000,
+      currency: 'RUB',
+      comment: 'Оценочная рыночная стоимость',
+      acquiredAt: '2022-08',
+      acquisitionCost: 7600000,
+    },
+    {
+      id: 'demo-asset-brokerage',
+      type: 'Инвестиции',
+      name: 'Брокерский счет',
+      amount: 1450000,
+      currency: 'RUB',
+      comment: 'Акции, облигации и фонды',
+      rate: 13,
+    },
+    {
+      id: 'demo-asset-cash',
+      type: 'Наличные',
+      name: 'Резервный фонд',
+      amount: 580000,
+      currency: 'RUB',
+      comment: 'Подушка безопасности на несколько месяцев',
+    },
+  ],
+  liabilities: [
+    {
+      id: 'demo-liability-mortgage',
+      type: 'Ипотека',
+      name: 'Остаток ипотеки',
+      amount: 4100000,
+      comment: 'Аннуитетный платеж до 2038 года',
+      rate: 8.4,
+    },
+    {
+      id: 'demo-liability-card',
+      type: 'Кредитная карта',
+      name: 'Кредитная карта',
+      amount: 85000,
+      comment: 'Текущий долг в льготном периоде',
+      rate: 0,
+    },
+    {
+      id: 'demo-liability-auto',
+      type: 'Автокредит',
+      name: 'Автокредит',
+      amount: 720000,
+      comment: 'Остаток по кредиту за автомобиль',
+      rate: 11.9,
+    },
+  ],
 };
 
 const ASSET_TYPES_WITH_ACQUISITION_DATE: AssetEntry['type'][] = ['Недвижимость', 'Автомобиль', 'Бизнес'];
