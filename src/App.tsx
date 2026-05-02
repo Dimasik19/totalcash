@@ -11,6 +11,8 @@ import PreviewModal from './components/PreviewModal';
 
 const STORAGE_KEY = 'total_cash_data';
 const CAPITAL_HISTORY_STORAGE_KEY = 'total_cash_capital_history';
+const DEMO_DATA_VERSION_KEY = 'total_cash_demo_data_version';
+const DEMO_DATA_VERSION = '1';
 
 const defaultData: AppData = {
   incomes: [
@@ -148,6 +150,13 @@ function getAssetCurrency(entry: AssetEntry): AssetCurrency {
   return assetNeedsCurrency(entry.type) ? entry.currency ?? 'RUB' : 'RUB';
 }
 
+function isAppDataEmpty(data: AppData): boolean {
+  return data.incomes.length === 0
+    && data.expenses.length === 0
+    && data.assets.length === 0
+    && data.liabilities.length === 0;
+}
+
 function convertToRub(amount: number, currency: AssetCurrency, rates: ExchangeRatesState): number {
   if (currency === 'RUB') return amount;
   return amount * rates[currency];
@@ -156,7 +165,14 @@ function convertToRub(amount: number, currency: AssetCurrency, rates: ExchangeRa
 function loadData(): AppData {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) return JSON.parse(raw) as AppData;
+    if (raw) {
+      const parsed = JSON.parse(raw) as AppData;
+      if (!isAppDataEmpty(parsed) || localStorage.getItem(DEMO_DATA_VERSION_KEY) === DEMO_DATA_VERSION) {
+        return parsed;
+      }
+    }
+
+    localStorage.setItem(DEMO_DATA_VERSION_KEY, DEMO_DATA_VERSION);
   } catch {}
   return defaultData;
 }
